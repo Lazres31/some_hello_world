@@ -15,10 +15,8 @@ int main(void) {
 		printf("%Lf\n", a-b);
 	else if (op[0] == '*')
 		printf("%Lf\n", a*b);
-	else if (op[0] == '/' && op[1] == '/'){
-		puts("Im in");
+	else if (op[0] == '/' && op[1] == '/')
 		printf("%lld\n", (long long int)a/(long long int)b);
-	}
 	else if (op[0] == '/')
 		printf("%Lf\n", a/b);
 	else if (op[0] == '%')
