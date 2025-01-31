@@ -1,31 +1,25 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#define PLUS_NUM 1
-#define MINUS_NUM 2
-#define DIVIDE_NUM 3
-#define MULTIPLE_NUM 4
-#define INT_DIVIDE_NUM 5
-#define REMAINDER 6
 int main(void) {
-	long double a,op,b;
-	printf("Available operations: [%d]: + [%d]: - [%d]: / [%d]: * [%d]: // [%d]: %%\n"
-			"Enter first number then operation and then second number: ",
-			PLUS_NUM, MINUS_NUM, DIVIDE_NUM, MULTIPLE_NUM, INT_DIVIDE_NUM, REMAINDER);
-	scanf("%Lf%Lf%Lf", &a, &op, &b);
+	char op;
+	long double a,b;
+	printf("Available operations: +,-,/,*,//,%%\n"
+			"Enter first number then operation and then second number: ");
+	scanf(" %Lf %c %Lf", &a, &op, &b);
 
 	printf("Result: ");
-	if (op == PLUS_NUM)
+	if (op == '+')
 		printf("%Lf\n", a+b);
-	else if (op == MINUS_NUM)
+	else if (op == '-')
 		printf("%Lf\n", a-b);
-	else if (op == DIVIDE_NUM)
+	else if (op == '/')
 		printf("%Lf\n", a/b);
-	else if (op == MULTIPLE_NUM)
+	else if (op == '*')
 		printf("%Lf\n", a*b);
-	else if (op == INT_DIVIDE_NUM)
+	else if (op == '/') //fixme
 		printf("%lld\n", (long long int)a/(long long int)b);
-	else if (op == REMAINDER)
+	else if (op == '%')
 		printf("%lld\n", (long long int)a%(long long int)b);
 	else
 		printf("Undefined operation\n");
