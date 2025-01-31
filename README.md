@@ -1,2 +1,2 @@
 # some_hello_world
-Projects for educational purpose
+Projects for educational purpose.
