@@ -9,16 +9,10 @@
 #define REMAINDER 6
 int main(void) {
 	long double a,op,b;
-	printf("Enter first number: ");
-	scanf("%Lf", &a);
-	printf("Choose operation: \n\t[%d]: +\t[%d]: -"
-			"\n\t[%d]: /\t[%d]: *"
-			"\n\t[%d]: //\t[%d]: %%\n",
-			PLUS_NUM, MINUS_NUM, DIVIDE_NUM,
-			MULTIPLE_NUM, INT_DIVIDE_NUM, REMAINDER );
-	scanf("%Lf", &op);
-	printf("Enter second number: ");
-	scanf("%Lf", &b);
+	printf("Available operations: [%d]: + [%d]: - [%d]: / [%d]: * [%d]: // [%d]: %%\n"
+			"Enter first number then operation and then second number: ",
+			PLUS_NUM, MINUS_NUM, DIVIDE_NUM, MULTIPLE_NUM, INT_DIVIDE_NUM, REMAINDER);
+	scanf("%Lf%Lf%Lf", &a, &op, &b);
 
 	printf("Result: ");
 	if (op == PLUS_NUM)
