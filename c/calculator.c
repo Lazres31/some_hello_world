@@ -2,24 +2,26 @@
 #include <stdbool.h>
 
 int main(void) {
-	char op;
+	char op[2] = {' '};
 	long double a,b;
 	printf("Available operations: +,-,/,*,//,%%\n"
 			"Enter first number then operation and then second number: ");
-	scanf(" %Lf %c %Lf", &a, &op, &b);
+	scanf(" %Lf %s %Lf", &a, op, &b);
 
 	printf("Result: ");
-	if (op == '+')
+	if (op[0] == '+')
 		printf("%Lf\n", a+b);
-	else if (op == '-')
+	else if (op[0] == '-')
 		printf("%Lf\n", a-b);
-	else if (op == '/')
-		printf("%Lf\n", a/b);
-	else if (op == '*')
+	else if (op[0] == '*')
 		printf("%Lf\n", a*b);
-	else if (op == '/') //fixme
+	else if (op[0] == '/' && op[1] == '/'){
+		puts("Im in");
 		printf("%lld\n", (long long int)a/(long long int)b);
-	else if (op == '%')
+	}
+	else if (op[0] == '/')
+		printf("%Lf\n", a/b);
+	else if (op[0] == '%')
 		printf("%lld\n", (long long int)a%(long long int)b);
 	else
 		printf("Undefined operation\n");
