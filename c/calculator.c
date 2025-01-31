@@ -7,25 +7,25 @@
 #define MULTIPLE_NUM 4
 
 int main(void) {
-	long long int a,op,b;
+	long double a,op,b;
 	printf("Enter first number: ");
-	scanf("%lld", &a);
+	scanf("%Lf", &a);
 	printf("Choose operation: \n\t[%d]: +"
 			"\n\t[%d]: -\n\t[%d]: //\n\t[%d]: *\n",
 			PLUS_NUM, MINUS_NUM, DIVIDE_NUM, MULTIPLE_NUM );
-	scanf("%lld", &op);
+	scanf("%Lf", &op);
 	printf("Enter second number: ");
-	scanf("%lld", &b);
+	scanf("%Lf", &b);
 
 	printf("Result: ");
 	if (op == PLUS_NUM)
-		printf("%lld\n", a+b);
+		printf("%Lf\n", a+b);
 	else if (op == MINUS_NUM)
-		printf("%lld\n", a-b);
+		printf("%Lf\n", a-b);
 	else if (op == DIVIDE_NUM)
-		printf("%lld\n", a/b);
+		printf("%Lf\n", a/b);
 	else if (op == MULTIPLE_NUM)
-		printf("%lld\n", a*b);
+		printf("%Lf\n", a*b);
 	else
 		printf("Undefined operation\n");
 
