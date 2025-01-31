@@ -11,9 +11,9 @@ int main(void) {
 	long double a,op,b;
 	printf("Enter first number: ");
 	scanf("%Lf", &a);
-	printf("Choose operation: \n\t[%d]: +"
-			"\n\t[%d]: -\n\t[%d]: /\n\t[%d]: *"
-			"\n\t[%d]: //\n\t[%d]: %%\n\t",
+	printf("Choose operation: \n\t[%d]: +\t[%d]: -"
+			"\n\t[%d]: /\t[%d]: *"
+			"\n\t[%d]: //\t[%d]: %%\n",
 			PLUS_NUM, MINUS_NUM, DIVIDE_NUM,
 			MULTIPLE_NUM, INT_DIVIDE_NUM, REMAINDER );
 	scanf("%Lf", &op);
