@@ -1,16 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include "calculator.h"
 
+#define MAX_VALUE_OF_CHARACTERS 256
+
 int main(void) {
+	char s[MAX_VALUE_OF_CHARACTERS] = {' '};
 	char op[2] = {' '};
+	char* tmp;
 	long double a,b;
+
 	printf("Available operations: +,-,/,*,//,%%\n"
 			"Enter first number then operation and then second number: ");
-	scanf(" %Lf %s %Lf", &a, op, &b);
-	
+	fgets(s, sizeof(s), stdin);
+
+	a = strtol(s, &tmp, 0);
+	parse_operator( &tmp, op, sizeof(op)/sizeof(op[0]) );
+	b = strtol(tmp, NULL, 0);
+
 	printf("Result: %Lf\n", calculate(a, op, b));
+
 	return EXIT_SUCCESS;
 }
 
@@ -32,5 +41,27 @@ long double calculate(long double a, char* op, long double b) {
 		exit(EXIT_FAILURE);
 	}
 	puts("[calculate]: Reached unreachable code. Send angry email to developer");
+	exit(EXIT_FAILURE);
+}
+
+void parse_operator(char** ps, char* res, int res_len) {
+	char* s = *ps;
+	int res_cur_len = 0;
+	for (int i = 0; i < MAX_VALUE_OF_CHARACTERS; i++) {
+		if (s[i] != ' ' && s[i] != '\n' && s[i] != '\0') {
+			if (res_cur_len > res_len) {
+				puts("[parse_operator]: result array is too small");
+				exit(EXIT_FAILURE);
+			}
+			res[res_cur_len] = s[i];
+			res_cur_len++;
+		} else if (res_cur_len != 0) {
+			if (i + 1 != MAX_VALUE_OF_CHARACTERS) 
+				*ps = &s[i+1];
+			else *ps = NULL;
+			return;
+		}
+	}
+	puts("There's no operator in the string");
 	exit(EXIT_FAILURE);
 }
