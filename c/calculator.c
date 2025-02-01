@@ -48,6 +48,7 @@ void parse_operator(char** ps, char* res, int res_len) {
 	char* s = *ps;
 	int res_cur_len = 0;
 
+
 	for (int i = 0; i < MAX_VALUE_OF_CHARACTERS; i++) {
 		if (s[i] != ' ' && s[i] != '\n' && s[i] != '\0') {
 			if (res_cur_len > res_len) {
