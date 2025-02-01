@@ -47,6 +47,7 @@ long double calculate(long double a, char* op, long double b) {
 void parse_operator(char** ps, char* res, int res_len) {
 	char* s = *ps;
 	int res_cur_len = 0;
+
 	for (int i = 0; i < MAX_VALUE_OF_CHARACTERS; i++) {
 		if (s[i] != ' ' && s[i] != '\n' && s[i] != '\0') {
 			if (res_cur_len > res_len) {
@@ -56,12 +57,13 @@ void parse_operator(char** ps, char* res, int res_len) {
 			res[res_cur_len] = s[i];
 			res_cur_len++;
 		} else if (res_cur_len != 0) {
-			if (i + 1 != MAX_VALUE_OF_CHARACTERS) 
+			if (i + 1 != MAX_VALUE_OF_CHARACTERS)
 				*ps = &s[i+1];
 			else *ps = NULL;
 			return;
 		}
 	}
+
 	puts("There's no operator in the string");
 	exit(EXIT_FAILURE);
 }
