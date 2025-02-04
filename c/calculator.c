@@ -3,13 +3,13 @@
 #include <string.h>
 #include "calculator.h"
 
-#define MAX_VALUE_OF_CHARACTERS 256
+#define MAX_VALUE_OF_CHARACTERS 2048
 #define ACCEPTABLE_OPERATORS {'+','-','*','/','%'}
 
 int main(int argc, char** argv) {
 	char s[MAX_VALUE_OF_CHARACTERS] = {' '};
 	char op[2] = {' '};
-	char* ptr_s_subarr = NULL;
+	char* ptr_s_subarr = s;
 	long double a,b;
 	
 	if (argc <= 1) {
@@ -35,42 +35,42 @@ int main(int argc, char** argv) {
 		}
 	}
 
-	a = strtol(s, &ptr_s_subarr, 0);
-	parse_operator( &ptr_s_subarr, op, sizeof(op)/sizeof(op[0]) );
-	b = strtol(ptr_s_subarr, NULL, 0);
+	a = strtol(ptr_s_subarr, &ptr_s_subarr, 0);
+	while (ptr_s_subarr[0] != '\0') {
+		int parse_status = parse_operator( &ptr_s_subarr, op,
+									sizeof(op)/sizeof(op[0]) );
+		if (parse_status == 1)
+			break;
+
+		b = strtol(ptr_s_subarr, &ptr_s_subarr, 0);
+		a = calculate(a, op, b);
+	}
 
 	if (argc <= 1)
 		printf("Result: ");
-	printf("%Lf\n", calculate(a, op, b));
+	printf("%Lf\n", a);
 
 	return EXIT_SUCCESS;
 }
 
-void parse_operator(char** ps, char* op, int op_arr_len) {
+int parse_operator(char** ps, char* op, int op_arr_len) {
 	char op_symbols[] = ACCEPTABLE_OPERATORS;
 	char* s = *ps;
 	int op_len = 0;
 
-	for (int i = 0; i < MAX_VALUE_OF_CHARACTERS; i++) {
+	for (int i = 0; i <= op_arr_len && s[i] != '\0'; i++) {
 
 		if (strchr( op_symbols, s[i] ) != NULL) {
-			if (op_len > op_arr_len) {
-				puts("Your operator length is too big");
-				exit(EXIT_FAILURE);
-			}
-
 			op[op_len] = s[i];
 			op_len++;
 
 		} else if (op_len != 0) {
 			*ps = &s[i];
-			return;
+			return 0;
 		}
 
 	}
-
-	puts("There's no operator in the input");
-	exit(EXIT_FAILURE);
+	return 1;
 }
 
 long double calculate(long double a, char* op, long double b) {

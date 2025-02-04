@@ -3,6 +3,6 @@
 
 long double calculate(long double a, char* op, long double b);
 
-void parse_operator(char** s, char* res, int res_len);
+int parse_operator(char** s, char* res, int res_len);
 
 #endif
